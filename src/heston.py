@@ -79,7 +79,7 @@ def _gl_panels(u_max: float, n_panels: int, nodes_per_panel: int,
     cached = _GL_CACHE.get(key)
     if cached is not None:
         return cached
-    x, w = np.polynomial.legendre.leggauss(nodes_per_panel)   # on [-1, 1]
+    x, w = np.polynomial.legendre.leggauss(nodes_per_panel)   
     width = u_max / n_panels
     edges = np.unique(np.r_[np.linspace(0.0, width, n_fine + 1),
                             np.arange(1, n_panels + 1) * width])
@@ -104,11 +104,11 @@ def carr_madan_call_price(S, K_arr, tau, v0, kappa, theta, sigma, rho,
     phi = np.exp(1j * cf_arg * np.log(S)) * cf_fn(
         cf_arg, tau, v0, kappa, theta, sigma, rho, r, q)
     denominator = alpha**2 + alpha - u**2 + 1j * u * (2.0 * alpha + 1.0)
-    psi = np.exp(-r * tau) * phi / denominator            # (n_u,)
+    psi = np.exp(-r * tau) * phi / denominator           
 
-    k = np.log(np.asarray(K_arr, dtype=float))            # (n_K,)
-    kernel = np.exp(-1j * np.outer(k, u))                 # (n_K, n_u)
-    integral = kernel @ (psi * wq)                        # (n_K,)
+    k = np.log(np.asarray(K_arr, dtype=float))     
+    kernel = np.exp(-1j * np.outer(k, u))                
+    integral = kernel @ (psi * wq)                       
     call_prices = np.exp(-alpha * k) / np.pi * integral.real
     return np.maximum(call_prices, 0.0)
 
