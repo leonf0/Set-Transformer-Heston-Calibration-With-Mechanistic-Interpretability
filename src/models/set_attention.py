@@ -91,14 +91,12 @@ class HestonSetAttention(nn.Module):
         self.decoder = nn.Sequential(*layers)
 
     def _encode(self, x: torch.Tensor):
-        """embed + SABs; returns list [embed, sab1, sab2, ...] of (B, N, d)."""
         feats = [self.embed(x)]
         for sab in self.sabs:
             feats.append(sab(feats[-1]))
         return feats
 
     def _pool(self, tokens: torch.Tensor) -> torch.Tensor:
-        """(B, N, d) -> (B, n_seeds, d) pooled representation."""
         if self.pooling == "pma":
             return self.pma(tokens)
         return tokens.mean(dim=1, keepdim=True)
