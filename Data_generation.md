@@ -20,5 +20,18 @@ Where $v_0 > 0$ is the initial variance of the process, $\theta > 0$ is the long
 
 Additonally the model must find some way to guarantee that the variance is strictly positive, this is done via the **Feller Condition.** which enforces that $2\kappa\theta > \xi^2$ which is sufficient to ensure $v_t > 0$ because as $v_t \to 0$, $\xi \sqrt{v_t} \to 0$ and $\kappa(\theta - v_t) \to \kappa\theta$ so the Feller Condition ensures the upward drift is large enough relative to the noise term that $v_t$ cannot reach zero within a finite amount of time.
 
-## Heston Characteristic Function Pricing
+## Heston Characteristic Function Pricing & Fourier Transforms
 
+Under the Heston model,the log asset price ($\log{S_T}$), has no closed-form density (the integrated-variance term is intractable), so we cannot price options using it by integrating a known density against the payoff like the Black–Scholes model does. However although the density is unavailable, its Fourier transform (the characteristic function) is available in closed form
+
+$$\varphi_X(u) = \mathbb{E}\left[e^{iuX}\right] = \int_{-\infty}^{\infty} e^{iux} f_X(x)dx$$
+
+The inversion Theorem says the forward transform doesn't lose any information, thus $f_X(x)$ can be rebuilt from $\varphi_X(u)$ by reassembling its frequency components, and is given by:
+
+$$f_{\log S_T}(x)= \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-iux}\varphi(u;\tau,\Psi)du$$
+
+Where $\varphi(u;\tau,\Psi)$ is the Heston Characteristic function given by
+
+$$ \varphi(u;\tau,\Psi) = \mathbb{E}^{\mathbb{Q}}\left[e^{iu \log S_T}\right] = e^{iu \log S_0}\varphi_{\mathrm{ret}}(u;\tau,\Psi) $$
+
+$$ \varphi_{\mathrm{ret}}(u;\tau,\Psi) = \mathbb{E}^{\mathbb{Q}}\left[e^{iu \log(S_T/S_0)}\right] $$
