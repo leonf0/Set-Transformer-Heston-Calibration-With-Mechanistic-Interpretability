@@ -9,7 +9,7 @@ heston_sat_mechinterp/
 ├── README.md
 ├── Data_generation.md
 ├── Architecture+Experiments.md
-├── Interpretability_analysis           
+├── Interpretability_analysis.md          
 ├── src/
 │   ├── __init__.py                  
 │   ├── config.py                    # paths, IV grid, experiment constants
