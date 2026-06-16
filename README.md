@@ -6,7 +6,10 @@ Dependencies: numpy, scipy, pandas, torch, matplotlib.
 
 ```
 heston_sat_mechinterp/
-├── README.md                        
+├── README.md
+├── Data_generation.md
+├── Architecture+Experiments.md
+├── Interpretability_analysis           
 ├── src/
 │   ├── __init__.py                  
 │   ├── config.py                    # paths, IV grid, experiment constants
