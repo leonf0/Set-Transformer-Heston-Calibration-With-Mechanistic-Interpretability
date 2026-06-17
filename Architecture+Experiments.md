@@ -34,21 +34,45 @@ $$\phi(X) = SAB(SAB(X))$$
 
 $$\rho(Z) = rFF(PMA_{4}(Z))$$
 
-Where SAB is a set attention block layer, $PMA_{4}$ is a pooling by multi-head attention layer with 4 seed vectors, rFF is a feedforward network. We will now explicate the function of these layers.
+Where SAB is a self attention block layer, $PMA_{4}$ is a pooling by multi-head attention layer with 4 seed vectors, rFF is a feedforward network. We will now explicate the function of these layers.
 
 ## The Set Transformer
-
-<p align="center">
-  <img src="diagrams/sat_architecture.png" alt="" width="80%"/>
-</p>
 
 <p align="center">
   <img src="diagrams/sab_architecture.png" alt="" width="80%"/>
 </p>
 
+### Diagram 1 - Self Attention Block architecture
+
+Self-attention is a mechanism is a mechanism that relates different elements of a set or sequence, with a goal of computing a represntation of this set/sequence. This mechanism has the advantage that the are no recurrence relations between elements, so all elements are related in a single operation ($O(1)$ path length). Given 3 vectors Q (the query), K (the key), and V (the value), we compute:
+
+$$Attention(Q,K,V) = Softmax(\frac{QK^{T}}{\sqrt{d_{k}}})V$$
+
+where $d_{k}$ is the dimension of the vector K. Multi-head attention linearly projects the queries, keys and values h times with different, learned linear projections to $d_{k}$ , $d_{k}$ and $d_{v}$ dimensions, and is computed by:
+
+$$MultiHead(Q,K,V) = Concat(head_{1}, ... , head_{h})W^{O}$$
+
+$$head_{i} = Attention(QW_{i}^{Q}, KW_{i}^{K}, VW_{i}^{V})$$
+
+Where $W_{i}^{Q}$, $W_{i}^{K}$, $W_{i}^{V}$, and $W^{O}$ are learned weight matrices.
+
+A Multi-head attention block is a function on to sets X and Y defined by:
+
+$$MAB(X,Y) = LayerNorm(H + rFF(H)), H = LayerNorm(X + MultiHead(X,Y,Y))$$
+
+Where LayerNorm is the layer normalisation operation (see Training and Evaluation section). Finally we define the set attention block as a function on a set X, given by:
+
+$$SAB(X) = MAB(X,X)$$
+
 <p align="center">
   <img src="diagrams/pma_architecture.png" alt="" width="80%"/>
 </p>
+
+<p align="center">
+  <img src="diagrams/sat_architecture.png" alt="" width="80%"/>
+</p>
+
+Diagram 3 - The full Set Transformer Architecture we use for this model calibration problem
 
 ## Baselines and Ablations
 
