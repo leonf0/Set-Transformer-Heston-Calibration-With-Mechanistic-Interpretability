@@ -72,7 +72,7 @@ $$SAB(X) = MAB(X,X)$$
 
 Pooling by Multi-head Attention uses a set (S) of k seed vectors with learnable paramteres to aggregate the features, we define the function as:
 
-$$PMA_{k}(Z) = MAB(S, rFF(Z)$$
+$$PMA_{k}(Z) = MAB(S, rFF(Z))$$
 
 ### Set Transformer Architecture We Use For the Model Calibration Problem
 
