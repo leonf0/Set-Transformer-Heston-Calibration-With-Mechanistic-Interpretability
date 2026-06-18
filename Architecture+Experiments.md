@@ -58,7 +58,7 @@ Where $W_{i}^{Q}$, $W_{i}^{K}$, $W_{i}^{V}$, and $W^{O}$ are learned weight matr
 
 A Multi-head attention block is a function on to sets X and Y defined by:
 
-$$MAB(X,Y) = LayerNorm(H + rFF(H)), H = LayerNorm(X + MultiHead(X,Y,Y))$$
+$$MAB(X,Y) = LayerNorm(H + rFF(H)) \qquad H = LayerNorm(X + MultiHead(X,Y,Y))$$
 
 Where LayerNorm is the layer normalisation operation (see Training and Evaluation section). Finally we define the set attention block as a function on a set X, given by:
 
