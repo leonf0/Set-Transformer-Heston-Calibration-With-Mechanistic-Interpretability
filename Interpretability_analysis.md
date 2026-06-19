@@ -44,7 +44,7 @@ $$f_{i}(x) = ReLU((x - b_{decoder})W_{encoder} + b_{encoder})$$
   <img src="diagrams/probe_heatmap.png" alt="" width="80%"/>
 </p>
 
-**Diagram 1** - Heatmap of per-peramater decodability across layers. Here we see an expected monotone increase in decodability of parameters as we reach the later layers of the model. Perhaps a more interesting insight is that the model requires it substantially more layers to create these "computationally useful" representations for paramaters $\kappa$
+**Diagram 1** - Heatmap of per-peramater decodability across layers. Here we see an expected monotone increase in decodability of parameters as we reach the later layers of the model. Perhaps a more interesting insight is that the model requires it substantially more layers to create these "computationally useful" representations for paramaters $\kappa$, $\xi$, and $\rho$; this seems to make sense as these parameters would intuitevely be identified by the interaction dynamics of the different points of the volatility surface. This is particulary the case with $\rho$, and we see that it is only reliable decodeable in the very last layer of the model.
 
 
 
@@ -61,5 +61,7 @@ $$f_{i}(x) = ReLU((x - b_{decoder})W_{encoder} + b_{encoder})$$
 | `curve_short` | 21 | 0.911 |
 
 **Table 1** - SAE extracted features with strongest correlation to known properties. "t_v0" is $log(v_{0})$,  "t_kappa" is $log(\kappa)$, "t_theta" is $log(\theta)$,  "t_sigma" is $log(\xi)$,  "t_rho" is $arctanh(\rho)$, "atm_short" is near-ATM implied volatility at the shortest maturity, "term_slope" is 1-year ATM implied volatility minus 1-week ATM implied volatility, "skew_short" is the linear coefficient of a quadratic fit of the 7-day smile against log-moneyness (financially interpreted as a combination of $\rho$ and $\xi$), "curve_short" is 2x the quadratic coefficient of that same fit (the smile's convexity).
+
+These findings very clearly demonstrate that sparse features align with human-readable surface geometry. Particularly surface geometry features are captured more cleanly than the parameters that drive it, which indicates that the model is actually learning to represent the volatility surface, and is not in any way overfitting to the data samples.
 
 
