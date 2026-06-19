@@ -1,4 +1,4 @@
-# Heston Calibration Set Attention Transformer + Mechanistic Interpretability
+# Heston Calibration Set Transformer + Mechanistic Interpretability
 
 ## Project Overview
 
