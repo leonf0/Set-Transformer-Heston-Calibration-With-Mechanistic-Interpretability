@@ -26,4 +26,3 @@ for i in range(4):
             label=", ".join(f"{n}={v:.2f}" for n, v in zip(PARAM_NAMES, y[i])))
 ax.set_xlabel("log-moneyness"); ax.set_ylabel("IV"); ax.legend(fontsize=6)
 ax.set_title("Example 7-day smiles from the generated dataset")
-savefig(plt, "data_example_smiles.png")
